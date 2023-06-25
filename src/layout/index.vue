@@ -1,12 +1,19 @@
 <template>
   <div class="layout_container">
     <div class="layout_slider">
-      <h1>deidei网站</h1>
+      <div class="layout_silder_info">
+        <img src="../assets/logo.jpeg" alt="" />
+        <p>deidei小店后台管理系统</p>
+      </div>
+
       <el-menu
         default-active="2"
         class="el-menu-vertical-demo"
         @open="handleOpen"
         @close="handleClose"
+        background-color="#001529"
+        text-color="#fff"
+        active-text-color="#ffd04b"
       >
         <el-menu-item index="1">
           <el-icon><icon-menu /></el-icon>
@@ -17,11 +24,10 @@
             <el-icon><location /></el-icon>
             <span>权限管理</span>
           </template>
-          <el-menu-item-group>
-            <el-menu-item index="1-1">用户管理</el-menu-item>
-            <el-menu-item index="1-2">角色管理</el-menu-item>
-            <el-menu-item index="1-3">菜单管理</el-menu-item>
-          </el-menu-item-group>
+
+          <el-menu-item index="1-1">用户管理</el-menu-item>
+          <el-menu-item index="1-2">角色管理</el-menu-item>
+          <el-menu-item index="1-3">菜单管理</el-menu-item>
         </el-sub-menu>
         <el-sub-menu index="3">
           <template #title>
@@ -40,7 +46,7 @@
     <div class="layout_tabbar">
       <el-main>
         <el-breadcrumb :separator-icon="ArrowRight">
-          <el-breadcrumb-item :to="{ path: '/' }">homepage</el-breadcrumb-item>
+          <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
           <el-breadcrumb-item>promotion management</el-breadcrumb-item>
           <el-breadcrumb-item>promotion list</el-breadcrumb-item>
           <el-breadcrumb-item>promotion detail</el-breadcrumb-item>
@@ -72,6 +78,20 @@ const handleClose = (key: string, keyPath: string[]) => {
     width: $base-menu-width;
     height: 100vh;
     background-color: $base-menu-background;
+    position: fixed;
+    .layout_silder_info {
+      padding: 15px;
+      display: flex;
+      align-items: center;
+      font-size: 16px;
+      color: white;
+      img {
+        width: 40px;
+        height: 40px;
+        margin-right: 10px;
+        border-radius: 50%;
+      }
+    }
   }
   .layout_tabbar {
     width: calc(100% - $base-menu-width);
@@ -86,7 +106,6 @@ const handleClose = (key: string, keyPath: string[]) => {
     left: $base-menu-width;
     width: calc(100% - $base-menu-width);
     height: calc(100vh - $base-tabbar-height);
-   
   }
 }
 </style>
