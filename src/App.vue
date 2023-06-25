@@ -41,7 +41,7 @@
 </template>
 
 <style scoped lang="scss">
-*{
-color: $color;
-}
+// *{
+// color: $color;
+// }
 </style>

@@ -21,7 +21,7 @@ request.interceptors.request.use((config)=>{
 request.interceptors.response.use((res)=>{
     // 可以简化响应的结果
     console.log(res.data)
-    return res
+    return res.data
 },(err)=>{
     let message=''
     const  status=err.response.status

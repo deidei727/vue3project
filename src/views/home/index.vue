@@ -1,7 +1,7 @@
 <template>
-    <div>
-        我是首页面
-    </div>
+  <div>
+    我是主屏幕
+  </div>
 </template>
 
 <script setup lang="ts">

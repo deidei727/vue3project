@@ -1,15 +1,16 @@
 import { createApp } from 'vue'
-import ElementPlus from 'element-plus';
+import ElementPlus from 'element-plus'
 import '@/style/index.scss'
 import 'element-plus/dist/index.css'
 import 'virtual:svg-icons-register'
 import router from './router'
+import pinia from './store'
 // 忽略当前文件ts类型的检测否则有红色提示(打包会失败)
-// @ts-ignore 
+// @ts-ignore
 import zhCn from 'element-plus/dist/locale/zh-cn.mjs'
 import App from '@/App.vue'
 // import SvgIcon from '@/components/SvgIcon/index.vue'
-import globalComponents  from '@/components';
+import globalComponents from '@/components'
 // import axios from 'axios'
 
 // // // 测试接口
@@ -36,13 +37,14 @@ import globalComponents  from '@/components';
 //     console.log(err)
 // });
 
-const app=createApp(App)
+const app = createApp(App)
 
 app.use(ElementPlus, {
-    locale: zhCn
+  locale: zhCn,
 })
 app.use(globalComponents)
 app.use(router)
+app.use(pinia)
 // 注册成全局组件
 // app.component('SvgIcon',SvgIcon)
 app.mount('#app')

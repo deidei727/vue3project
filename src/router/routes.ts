@@ -7,7 +7,7 @@ export default [
     },
     {
         path:'/',
-        component:()=> import ('@/views/home/index.vue'),
+        component:()=> import ('@/layout/index.vue'),
         name: 'home'
     },
     {
