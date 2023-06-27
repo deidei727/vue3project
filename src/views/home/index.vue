@@ -7,19 +7,23 @@
       </div>
       
       <el-menu
-      default-active="2"
+      :default-active="$route.path"
       class="el-menu-vertical-demo"
       @open="handleOpen"
       @close="handleClose"
       background-color="#001529"
       text-color="#fff"
       active-text-color="#ffd04b"
+      :collapse="isCollapse"
       router
     >
       <Menu :menuList="userStore.menuRoutes"></Menu>
     </el-menu>
     </div>
     <div class="layout_tabbar">
+      <el-icon @click="changeIcon"> 
+        <component :is="icon"></component>
+      </el-icon>
       <el-main>
         <el-breadcrumb :separator-icon="ArrowRight">
           <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
@@ -30,9 +34,6 @@
       </el-main>
     </div>
     <div class="layout_main">
-      <!-- <p style="height: 1000px">nsjhid</p> -->
-
-    
         <router-view></router-view>
         <p style="height: 1000px">nsjhid</p>
       <!-- </template> -->
@@ -45,7 +46,19 @@
 import { ArrowRight } from '@element-plus/icons-vue'
 import Menu from '@/components/menu/index.vue'
 import useUserPinia from '@/store/modules/user'
+import { useRoute } from 'vue-router'
+import { ref} from 'vue'
 let userStore = useUserPinia()
+let $route= useRoute()
+console.log($route)
+
+let icon=ref('Fold')
+const isCollapse=ref(true)
+const changeIcon= ()=>{
+  isCollapse.value=!isCollapse.value
+  icon.value=icon.value=='Fold'?'Expand':'Fold'
+
+}
 const handleOpen = (key: string, keyPath: string[]) => {
   console.log(key, keyPath)
 }
@@ -84,6 +97,9 @@ const handleClose = (key: string, keyPath: string[]) => {
     position: fixed;
     top: 0;
     left: $base-menu-width;
+    display: flex;
+    align-items: center;
+    padding: 10px;
   }
   .layout_main {
     position: absolute;
