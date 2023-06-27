@@ -5,43 +5,18 @@
         <img src="../assets/logo.jpeg" alt="" />
         <p>deidei小店后台管理系统</p>
       </div>
-
+      
       <el-menu
-        default-active="2"
-        class="el-menu-vertical-demo"
-        @open="handleOpen"
-        @close="handleClose"
-        background-color="#001529"
-        text-color="#fff"
-        active-text-color="#ffd04b"
-      >
-        <el-menu-item index="1">
-          <el-icon><icon-menu /></el-icon>
-          <template #title>数据大屏</template>
-        </el-menu-item>
-        <el-sub-menu index="2">
-          <template #title>
-            <el-icon><location /></el-icon>
-            <span>权限管理</span>
-          </template>
-
-          <el-menu-item index="1-1">用户管理</el-menu-item>
-          <el-menu-item index="1-2">角色管理</el-menu-item>
-          <el-menu-item index="1-3">菜单管理</el-menu-item>
-        </el-sub-menu>
-        <el-sub-menu index="3">
-          <template #title>
-            <el-icon><location /></el-icon>
-            <span>商品管理</span>
-          </template>
-          <el-menu-item-group>
-            <el-menu-item index="2-1">品牌管理</el-menu-item>
-            <el-menu-item index="2-2">属性管理</el-menu-item>
-            <el-menu-item index="2-3">SPU管理</el-menu-item>
-            <el-menu-item index="2-4">SKU管理</el-menu-item>
-          </el-menu-item-group>
-        </el-sub-menu>
-      </el-menu>
+      default-active="2"
+      class="el-menu-vertical-demo"
+      @open="handleOpen"
+      @close="handleClose"
+      background-color="#001529"
+      text-color="#fff"
+      active-text-color="#ffd04b"
+    >
+      <Menu :menuList="userStore.menuRoutes"></Menu>
+    </el-menu>
     </div>
     <div class="layout_tabbar">
       <el-main>
@@ -60,7 +35,10 @@
 </template>
 
 <script setup lang="ts">
-import { Menu as IconMenu, Location, ArrowRight } from '@element-plus/icons-vue'
+import { ArrowRight } from '@element-plus/icons-vue'
+import Menu from './menu.vue'
+import useUserPinia from '@/store/modules/user'
+let userStore = useUserPinia()
 const handleOpen = (key: string, keyPath: string[]) => {
   console.log(key, keyPath)
 }
