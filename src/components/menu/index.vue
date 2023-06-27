@@ -1,7 +1,7 @@
 <template>
   <template v-for="item in menuList" :key="item.path">
     <template v-if="!item.children">
-      <el-menu-item :index="item.path" v-if="!item.meta.hidden">
+      <el-menu-item :index="item.path" v-if="!item.meta.hidden" >
         <el-icon>
           <component :is="item.meta.icon"></component>
         </el-icon>
@@ -13,18 +13,17 @@
         :index="item.children[0].path"
         v-if="!item.children[0].meta.hidden"
       >
-        {{ item.children[0].meta.title }}
         <el-icon>
-          <component :is="item.meta.icon"></component>
+          <component :is="item.children[0].meta.icon"></component>
         </el-icon>
         <template #title>
-          <span>{{ item.meta.children[0].title }}</span>
+          <span>{{ item.children[0].meta.title }}</span>
         </template>
       </el-menu-item>
     </template>
 
     <template v-if="item.children && item.children.length > 1">
-      <el-sub-menu :index="item.path">
+      <el-sub-menu :index="item.path" >
         <template #title>
           <el-icon>
             <component :is="item.meta.icon"></component>

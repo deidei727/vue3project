@@ -12,7 +12,7 @@ export default [
     },
     {
         path:'/',
-        component:()=> import ('@/layout/index.vue'),
+        component:()=> import ('@/views/home/index.vue'),
         name: 'home',
         meta: {
             title: '首页',
@@ -43,17 +43,24 @@ export default [
     },
     {
         path: '/screen',
-        component: () => import('@/views/screen/index.vue'),
+        component: () => import('@/views/home/index.vue'),
         name: 'Screen',
-        meta: {
-            hidden: false,
-            title: '数据大屏',
-            icon: 'Platform'
-        }
+        redirect: '/screen',
+        children: [
+            {
+                path: '/screen',
+                component: () => import('@/views/screen/index.vue'),
+                name: 'Screen',
+                meta: {
+                    title: '数据大屏',
+                    icon: 'Platform'
+                }
+            },
+        ]
     },
     {
         path: '/acl',
-        component: () => import('@/layout/index.vue'),
+        component: () => import('@/views/home/index.vue'),
         name: 'Acl',
         meta: {
             title: '权限管理',
@@ -92,7 +99,7 @@ export default [
     },
     {
         path: '/product',
-        component: () => import('@/layout/index.vue'),
+        component: () => import('@/views/home/index.vue'),
         name: 'Product',
         meta: {
             title: '商品管理',
