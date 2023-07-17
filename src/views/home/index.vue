@@ -1,43 +1,71 @@
 <template>
   <div class="layout_container">
-    <div class="layout_slider">
+    <div class="layout_slider" :class="{ fold: isCollapse ? true : false }">
       <div class="layout_silder_info">
         <img src="../../assets/logo.jpeg" alt="" />
         <p>deidei小店后台管理系统</p>
       </div>
-      
+
       <el-menu
-      :default-active="$route.path"
-      class="el-menu-vertical-demo"
-      @open="handleOpen"
-      @close="handleClose"
-      background-color="#001529"
-      text-color="#fff"
-      active-text-color="#ffd04b"
-      :collapse="isCollapse"
-      router
-    >
-      <Menu :menuList="userStore.menuRoutes"></Menu>
-    </el-menu>
+        :default-active="$route.path"
+        class="el-menu-vertical-demo"
+        @select="handleSelect"
+        background-color="#001529"
+        text-color="#fff"
+        active-text-color="#ffd04b"
+        :collapse="isCollapse"
+        router
+      >
+        <Menu :menuList="userStore.menuRoutes"></Menu>
+      </el-menu>
     </div>
-    <div class="layout_tabbar">
-      <el-icon @click="changeIcon"> 
-        <component :is="icon"></component>
-      </el-icon>
-      <el-main>
+    <div class="layout_tabbar" :class="{ fold: isCollapse ? true : false }">
+      <div class="layout_tabbar_left">
+        <el-icon @click="changeIcon">
+          <component :is="icon"></component>
+        </el-icon>
         <el-breadcrumb :separator-icon="ArrowRight">
-          <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-          <el-breadcrumb-item>promotion management</el-breadcrumb-item>
-          <el-breadcrumb-item>promotion list</el-breadcrumb-item>
-          <el-breadcrumb-item>promotion detail</el-breadcrumb-item>
+          <el-breadcrumb-item
+            v-for="(item, index) in $route.matched"
+            :key="index"
+            :to="item.path"
+            v-show="item.meta.title"
+          >
+            <el-icon>
+              <component :is="item.meta.icon"></component>
+            </el-icon>
+            <span style="margin: 0 5px">{{ item.meta.title }}</span>
+          </el-breadcrumb-item>
         </el-breadcrumb>
-      </el-main>
+      </div>
+      <div class="layout_tabbar_right">
+        <el-button size="small" icon="Refresh" circle></el-button>
+        <el-button size="small" icon="FullScreen" circle></el-button>
+        <el-button size="small" icon="Setting" circle></el-button>
+        <img src="../../assets/userlogo.jpg" style="width: 24px;height: 24px;margin:0px 10px;border-radius: 50%;">
+        <el-dropdown>
+          <span class="el-dropdown-link">
+            admin
+            <el-icon class="el-icon--right">
+              <arrow-down />
+            </el-icon>
+          </span>
+          <template #dropdown>
+            <el-dropdown-menu>
+              <el-dropdown-item >退出登录</el-dropdown-item>
+            </el-dropdown-menu>
+          </template>
+        </el-dropdown>
+      </div>
     </div>
-    <div class="layout_main">
-        <router-view></router-view>
-        <p style="height: 1000px">nsjhid</p>
+    <div class="layout_main" :class="{ fold: isCollapse ? true : false }">
+      <router-view v-slot="{ Component }">
+        <transition name="fade">
+          <component :is="Component" />
+        </transition>
+      </router-view>
+      <!-- <p style="height: 1000px">nsjhid</p> -->
       <!-- </template> -->
-      
     </div>
   </div>
 </template>
@@ -47,22 +75,20 @@ import { ArrowRight } from '@element-plus/icons-vue'
 import Menu from '@/components/menu/index.vue'
 import useUserPinia from '@/store/modules/user'
 import { useRoute } from 'vue-router'
-import { ref} from 'vue'
+import { ref } from 'vue'
 let userStore = useUserPinia()
-let $route= useRoute()
-console.log($route)
+let $route = useRoute()
+let path = ref('')
+console.log($route.matched)
 
-let icon=ref('Fold')
-const isCollapse=ref(true)
-const changeIcon= ()=>{
-  isCollapse.value=!isCollapse.value
-  icon.value=icon.value=='Fold'?'Expand':'Fold'
-
+let icon = ref('Fold')
+const isCollapse = ref(true)
+const changeIcon = () => {
+  isCollapse.value = !isCollapse.value
+  icon.value = icon.value == 'Fold' ? 'Expand' : 'Fold'
 }
-const handleOpen = (key: string, keyPath: string[]) => {
-  console.log(key, keyPath)
-}
-const handleClose = (key: string, keyPath: string[]) => {
+const handleSelect = (key: string, keyPath: string[]) => {
+  path.value = key
   console.log(key, keyPath)
 }
 </script>
@@ -77,6 +103,11 @@ const handleClose = (key: string, keyPath: string[]) => {
     height: 100vh;
     background-color: $base-menu-background;
     position: fixed;
+    overflow: hidden;
+    transition: all 0.3s;
+    &.fold {
+      width: $base-menu-fold-width;
+    }
     .layout_silder_info {
       padding: 15px;
       display: flex;
@@ -98,8 +129,24 @@ const handleClose = (key: string, keyPath: string[]) => {
     top: 0;
     left: $base-menu-width;
     display: flex;
-    align-items: center;
+    justify-content: space-between;
+    background-color: aqua;
     padding: 10px;
+    &.fold {
+      width: calc(100% - $base-menu-fold-width);
+      left: $base-menu-fold-width;
+    }
+    &_left {
+      display: flex;
+      align-items: center;
+      .el-breadcrumb {
+        margin-left: 15px;
+      }
+    }
+    &_right {
+      display: flex;
+      align-items: center;
+    }
   }
   .layout_main {
     position: absolute;
@@ -107,6 +154,20 @@ const handleClose = (key: string, keyPath: string[]) => {
     left: $base-menu-width;
     width: calc(100% - $base-menu-width);
     height: calc(100vh - $base-tabbar-height);
+    padding: 10px;
+    &.fold {
+      width: calc(100% - $base-menu-fold-width);
+      left: $base-menu-fold-width;
+    }
+  }
+  .fade-enter-from {
+    opacity: 0;
+  }
+  .fade-enter-active {
+    transition: all 0.3s linear;
+  }
+  .fade-enter-to {
+    opacity: 1;
   }
 }
 </style>

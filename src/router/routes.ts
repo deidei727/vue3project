@@ -13,11 +13,6 @@ export default [
     path: '/',
     component: () => import('@/views/home/index.vue'),
     name: 'home',
-    meta: {
-      title: '首页',
-      hidden: false,
-      icon: 'House',
-    },
     redirect: '/home',
     children: [
       {
@@ -54,20 +49,12 @@ export default [
   },
   {
     path: '/screen',
-    component: () => import('@/views/home/index.vue'),
+    component: () => import('@/views/screen/index.vue'),
     name: 'Screen',
-    redirect: '/screen',
-    children: [
-      {
-        path: '/screen',
-        component: () => import('@/views/screen/index.vue'),
-        name: 'Screen',
-        meta: {
-          title: '数据大屏',
-          icon: 'Platform',
-        },
-      },
-    ],
+    meta: {
+      title: '数据大屏',
+      icon: 'Platform',
+    },
   },
   {
     path: '/acl',

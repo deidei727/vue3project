@@ -18,15 +18,21 @@
     "preinstall": "node ./scripts/preinstall.js"
   },
   "dependencies": {
+    "@amap/amap-jsapi-loader": "^1.0.1",
     "@element-plus/icons-vue": "^2.1.0",
     "axios": "^1.4.0",
+    "dayjs": "^1.11.9",
+    "echarts": "^5.4.2",
+    "echarts-liquidfill": "^3.1.0",
     "element-plus": "^2.3.6",
     "pinia": "2.0.34",
     "vue": "^3.2.47",
     "vue-router": "^4.2.2"
   },
   "devDependencies": {
+    "@amap/amap-jsapi-types": "^0.0.13",
     "@babel/eslint-parser": "^7.21.8",
+    "@types/node": "^20.4.2",
     "@typescript-eslint/eslint-plugin": "^5.59.8",
     "@typescript-eslint/parser": "^5.59.8",
     "@vitejs/plugin-vue": "^4.1.0",
