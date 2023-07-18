@@ -11,6 +11,7 @@ import zhCn from 'element-plus/dist/locale/zh-cn.mjs'
 import App from '@/App.vue'
 // import SvgIcon from '@/components/SvgIcon/index.vue'
 import globalComponents from '@/components'
+import './permission'
 // import axios from 'axios'
 
 // // // 测试接口
