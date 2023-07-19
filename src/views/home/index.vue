@@ -42,17 +42,17 @@
         <el-button size="small" icon="Refresh" circle></el-button>
         <el-button size="small" icon="FullScreen" circle></el-button>
         <el-button size="small" icon="Setting" circle></el-button>
-        <img src="../../assets/userlogo.jpg" style="width: 24px;height: 24px;margin:0px 10px;border-radius: 50%;">
+        <img :src="userStore.userInfoDate.avatar" style="width: 24px;height: 24px;margin:0px 10px;border-radius: 50%;">
         <el-dropdown>
           <span class="el-dropdown-link">
-            admin
+            {{userStore.userInfoDate.username}}
             <el-icon class="el-icon--right">
               <arrow-down />
             </el-icon>
           </span>
           <template #dropdown>
             <el-dropdown-menu>
-              <el-dropdown-item >退出登录</el-dropdown-item>
+              <el-dropdown-item  @click="loginOut">退出登录</el-dropdown-item>
             </el-dropdown-menu>
           </template>
         </el-dropdown>
@@ -74,9 +74,11 @@
 import { ArrowRight } from '@element-plus/icons-vue'
 import Menu from '@/components/menu/index.vue'
 import useUserPinia from '@/store/modules/user'
-import { useRoute } from 'vue-router'
+import { useRoute,useRouter } from 'vue-router'
 import { ref } from 'vue'
 let userStore = useUserPinia()
+console.log(userStore.userInfoDate)
+let $router = useRouter()
 let $route = useRoute()
 let path = ref('')
 console.log($route.matched)
@@ -90,6 +92,15 @@ const changeIcon = () => {
 const handleSelect = (key: string, keyPath: string[]) => {
   path.value = key
   console.log(key, keyPath)
+}
+// 退出登录
+const loginOut=()=>{
+//第一步：发起请求（退出登录的接口）
+// 第二步：将仓库中相关数据清空token、username等等
+// 第三步：跳转到login页面
+ userStore.userLoginOut()
+ $router.push('/login')
+
 }
 </script>
 

@@ -5,7 +5,7 @@ function createUserList() {
         {
             userId: 1,
             avatar:
-                'https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif',
+                'https://cube.elemecdn.com/6/94/4d3ea53c084bad6931a56d5158a48jpeg.jpeg',
             username: 'admin',
             password: '111111',
             desc: '平台管理员',
