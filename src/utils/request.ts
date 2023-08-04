@@ -15,7 +15,6 @@ const request=axios.create({
 request.interceptors.request.use((config)=>{
     // useUserPinia() 函数的初始化过程需要在应用程序初始化之后才能完成，所以不能直接放在最开始的位置
     const userStore = useUserPinia()
-    console.log("请求",userStore.token)
     //  在config配置对象中有一个headers属性请求头，经常给服务器端携带参数
     config.headers.token=localStorage.getItem("TOKEN")
     return config
@@ -24,14 +23,11 @@ request.interceptors.request.use((config)=>{
 // 响应拦截器
 request.interceptors.response.use((res)=>{
     // 可以简化响应的结果
-    console.log(res.data.data.token)
-    // if(!res.data.data.token){
-    //     console.log('跳转')
-    // }
+ 
     return res.data
 },(err)=>{
     let message=''
-    const  status=err.response.status
+    const  status=err.response?.status
     switch (status) {
         case 401:
             message='TOKEN过期';

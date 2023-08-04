@@ -1,31 +1,35 @@
 // 管理用户类型的文件
-export interface LoginForm {
+
+// 登录请求数据类型
+export interface LoginFormData {
   username: string
   password: string
 }
 
-
-export interface LoginResponseDate {
+// 定义所有响应数据的接口类型
+interface ResponseData{
   code: number
-  data: {
-    token?: string
-    message?: string
-  }
+  ok: boolean
+  message: string
 }
 
-interface UserDataType {
-  userId: number
+// 登录响应数据类型
+export interface LoginResponseDate extends ResponseData {
+  data:string
+}
+
+interface UserInfoType {
   avatar: string
-  username: string
-  password: string
-  desc: string
+  name: string
   roles: string[]
   buttons: string[]
   routes: string[]
-  token: string
 }
 
-export interface UserResponseDate {
-  code: number
-  data: UserDataType
+export interface UserResponseDate extends ResponseData {
+  data: UserInfoType
+}
+
+export interface LogoOutResponseDate extends ResponseData {
+  data:null
 }

@@ -11,35 +11,35 @@ nprogress.configure({ showSpinner: false })
 router.beforeEach(async (to, from, next) => {
   nprogress.start()
   const token = userStore.token
-  console.log('仓库的', token)
-  console.log('本地的', localStorage.getItem('TOKEN'))
   // 用户登陆了
   if (token) {
 
-    if (token == localStorage.getItem('TOKEN')&&to.path === '/login') {
+    if (token == localStorage.getItem('TOKEN') && to.path === '/login') {
       // 当用户还要访问登陆页的时候，将其跳转到/路径
       next('/')
-      } else {
-        try {
-          // 请求用户信息
-          await userStore.userInfo()
-          next()
-        } catch (e) {
-          // 请求失败或者是token被更改了或者token过期了
-          ElMessage({
-            type: 'error',
-            message: '你的登陆信息过期了，请重新登陆',
-          })
-          userStore.userLoginOut()
-          next({
-            path: '/login',
-          })
-        }
+    } else {
+      try {
+        // 请求用户信息
+        await userStore.userInfo()
+        next()
+      } catch (e) {
+        // 请求失败或者是token被更改了或者token过期了
+       userStore.userLoginOut()
+        ElMessage({
+          type: 'error',
+          message: '你的登陆信息过期了，请重新登陆',
+        })
+        next({
+          path: '/login',
+          query: {
+            redirect: to.path
+          }
+        })
       }
+    }
   } else {
     // 用户没有登陆
     // 如果访问的是login页面，允许通过.否则跳转到登陆页面
-    console.log(1111)
     if (to.path == '/login') {
       next()
     } else {

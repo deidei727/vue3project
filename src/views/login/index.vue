@@ -38,7 +38,6 @@
         </el-col>
       </el-row>
     </div>
-    <!-- <img src="@/assets/images/background.jpg" alt=""> -->
   </div>
 </template>
 
@@ -47,7 +46,7 @@ import { reactive, ref } from 'vue'
 import type { FormRules } from 'element-plus'
 import { User, Lock } from '@element-plus/icons-vue'
 import useUserPinia from '@/store/modules/user'
-import { useRouter } from 'vue-router'
+import { useRouter,useRoute } from 'vue-router'
 import { ElNotification } from 'element-plus'
 import getTime from '@/utils/times'
 
@@ -72,6 +71,8 @@ const rules = reactive<FormRules<RuleForm>>({
 })
 
 let $router = useRouter()
+let $route = useRoute()
+
 let loading = ref(false)
 let loginFormRef=ref()
 let useUserStore = useUserPinia()
@@ -88,7 +89,10 @@ const onSubmit = async () => {
   loading.value = true
   useUserStore.userLogin(loginForm).then(result => {
       // 进行路由跳转
-      $router.push('/')
+      let redirect:any=$route.query.redirect
+      $router.push({
+        path: redirect || '/',
+      })
       ElNotification({
         title: '登陆成功',
         message: `hi！ ${getTime()}好，欢迎登陆`,
@@ -112,10 +116,14 @@ const onSubmit = async () => {
 
 <style scoped lang="scss">
 .login_container {
-  width: 100%;
+  width: 100vw;
   height: 100vh;
   background: url('@/assets/images/background.jpg') no-repeat;
   background-size: cover;
+  .el-row{
+    margin-left: 10px !important;
+    margin-right: 10px !important;
+  }
   .login_form {
     width: 90%;
     position: relative;
