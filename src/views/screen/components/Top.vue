@@ -38,8 +38,8 @@ onBeforeUnmount(() => {
 
 <style scoped lang="scss">
 .header {
-  width: 100vw;
-  height: 40px;
+  width: 100%;
+  height:100% ;
   display: flex;
 
   .left {
@@ -50,9 +50,9 @@ onBeforeUnmount(() => {
 
     .lbtn {
       width: 150px;
-      height: 50px;
+      height: 40px;
       text-align: center;
-      line-height: 50px;
+      line-height: 40px;
       color: #29fcff;
       float: right;
       font-size: 20px;
@@ -70,14 +70,15 @@ onBeforeUnmount(() => {
     justify-content: center;
     .title {
       color: #29fcff;
-      font-size: 30px;
+      font-size: 32px;
+      letter-spacing: 0.3em;
     }
   }
   .right {
-    flex: 1.5;
+    flex: 1.3;
     background: url('../images/dataScreen-header-right-bg.png') no-repeat;
     background-size: cover;
-
+    padding: 0 50px 0 0;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -91,6 +92,7 @@ onBeforeUnmount(() => {
       color: #29fcff;
       background-size: 100% 100%;
       font-size: 20px;
+     
     }
     .time {
       color: #29fcff;

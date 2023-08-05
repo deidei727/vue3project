@@ -35,8 +35,8 @@ onMounted(() => {
     title: {
       text: '水球图',
       textStyle: {
-                color:'#fff',
-            }
+        color: '#fff',
+      },
     },
     //x|y轴组件
     xAxis: {},
@@ -76,8 +76,7 @@ onMounted(() => {
 <style scoped lang="scss">
 .box {
   background: url(../../images/dataScreen-main-lt.png) no-repeat;
-    background-size: 100% 100%;
-  margin-top: 10px;
+  background-size: 100% 100%;
 
   .top {
     margin-left: 20px;
@@ -98,8 +97,7 @@ onMounted(() => {
     .right {
       float: right;
       color: white;
-      font-size: 20px;
-
+      font-size: 16px;
       span {
         color: yellowgreen;
       }
@@ -108,8 +106,9 @@ onMounted(() => {
 
   .number {
     padding: 10px;
-    margin-top: 30px;
+    margin-top: 20px;
     display: flex;
+    font-size: 30px;
 
     span {
       flex: 1;
@@ -117,7 +116,6 @@ onMounted(() => {
       text-align: center;
       line-height: 40px;
       background: url(../../images/total.png) no-repeat;
-      background-size: 100% 100%;
       color: #29fcff;
     }
   }

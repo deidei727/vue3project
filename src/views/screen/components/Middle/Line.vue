@@ -22,7 +22,7 @@ onMounted(() => {
     title: {
       text: '访问量',
       textStyle: {
-        color: '#fff',
+        color: 'white',
       },
       show: false,
     },
@@ -39,6 +39,9 @@ onMounted(() => {
       //轴线的设置
       axisLine: {
         show: true,
+        lineStyle:{
+          color:'white',
+        }
       },
       //刻度
       axisTick: {
@@ -53,10 +56,14 @@ onMounted(() => {
       },
       nameTextStyle:{
         align: 'right',
+        color:'white',
       },
       //轴线的设置
       axisLine: {
         show: true,
+        lineStyle:{
+          color:'white',
+        }
       },
       //刻度
       axisTick: {
@@ -64,10 +71,10 @@ onMounted(() => {
       },
     },
     grid: {
-      left: '4%',
+      left: '5%',
       top: '25%',
       right: '2%',
-      bottom: '15%',
+      bottom: '10%',
     },
     //系列
     series: [

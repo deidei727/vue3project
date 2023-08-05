@@ -1,7 +1,7 @@
 <template>
     <div class="box8">
       <div class="title">
-        <p>数据统计</p>
+        <p>预约渠道数据统计</p>
         <img src="../../images/dataScreen-title.png" alt="">
       </div>
       <div class="charts" ref="charts"></div>
@@ -22,10 +22,10 @@
         text: '游客消费统计',
         textStyle:{
           color:'white'
-        }
+        },
+        show:false,
       },
       radar: {
-        // shape: 'circle',
         indicator: [
           { name: '消费', max: 6500 },
           { name: '好感', max: 16000 },
@@ -61,14 +61,14 @@
   .box8 {
     width: 100%;
     height: 100%;
-    background: url(../../images/dataScreen-main-cb.png) no-repeat;
+    background: url(../../images/dataScreen-main-rb.png) no-repeat;
     background-size: 100% 100%;
     margin-top: 10px;
   
     .title {
       p {
         color: white;
-        font-size: 18px;
+        font-size: 20px;
       }
     }
   

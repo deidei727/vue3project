@@ -20,7 +20,7 @@ onMounted(() => {
     //地图组件
     geo: {
       map: 'china', //中国地图
-      roam: true, //鼠标缩放的效果
+      roam: false, //鼠标缩放的效果
       //地图的位置调试
       left: 150,
       top: 150,
@@ -36,7 +36,7 @@ onMounted(() => {
 
       itemStyle: {
         //每一个多边形的样式
-        borderColor: '#29fcff',
+        borderColor: '#4de4fd',
         color: {
           type: 'linear',
           x: 0,

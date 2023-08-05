@@ -5,16 +5,19 @@
       <img src="../../images/dataScreen-title.png" alt="" />
     </div>
     <div class="sex">
-      <div class="man">
+      <div class="man people">
         <img src="../../images/man.png" alt="" />
+        <p>男士</p>
       </div>
-      <div class="women">
+      <div class="women people">
         <img src="../../images/woman.png" alt="" />
+        <p>女士</p>
       </div>
     </div>
     <div class="rate">
       <p>男士58%</p>
       <p>女士42%</p>
+      
     </div>
     <div class="charts" ref="charts"></div>
   </div>
@@ -38,6 +41,7 @@ onMounted(() => {
         color: 'skyblue',
       },
       left: '40%',
+      top:'30%'
     },
     //x|y
     xAxis: {
@@ -53,6 +57,7 @@ onMounted(() => {
       {
         type: 'bar',
         data: [58],
+        name:'那是',
         barWidth: 20,
         z: 100,
         itemStyle: {
@@ -73,9 +78,9 @@ onMounted(() => {
       },
     ],
     grid: {
-      left: 0,
-      top: 0,
-      right: 0,
+      left: 20,
+      top: 50,
+      right: 10,
       bottom: 0,
     },
   })
@@ -102,26 +107,28 @@ onMounted(() => {
   .sex {
     display: flex;
     justify-content: center;
-
-    .man {
-      margin: 20px;
-      width: 111px;
-      height: 115px;
-      background: url(../../images/man-bg.png) no-repeat;
-
+    align-items: center;
+    margin-top: 40px;
+    .people{
+      width: 90px;
+      height: 90px;
+      margin: 0 40px;
       display: flex;
-      justify-content: center;
+      flex-direction: column-reverse;
+      justify-content: space-between;
       align-items: center;
+      color: white;
+
+
+    }
+    .man {
+      background: url(../../images/man-bg.png) no-repeat;
+      background-size: cover;
     }
 
     .women {
-      margin: 20px;
-      width: 111px;
-      height: 115px;
       background: url(../../images/woman-bg.png) no-repeat;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      background-size: cover;
     }
   }
 
@@ -133,7 +140,10 @@ onMounted(() => {
   }
 
   .charts {
+    box-sizing: border-box;
+    width: 90%;
     height: 90px;
+    // padding: 10px;
   }
 }
 </style>

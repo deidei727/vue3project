@@ -17,11 +17,9 @@ export const useResize = (options: ResizeTypes = {}) => {
   const scale = ref(1)
 
   function resize() {
-    const clientWidth =  document.body.clientWidth
-    const clientHeight = document.body.clientHeight
 
-    const scaleW = clientWidth / w
-    const scaleH = clientHeight / h
+    const scaleW = window.innerWidth / w
+    const scaleH = window.innerHeight / h
     //   / 判断当前的宽高比和默认的宽高比大小
     if (scaleW<scaleH) {
       scale.value = scaleW
@@ -30,10 +28,10 @@ export const useResize = (options: ResizeTypes = {}) => {
     }
     if (fullScreen) {
       // 全屏:
-      screenRef.value.style.transform = `scale(${scaleW}, ${scaleH})`
+      screenRef.value.style.transform = `scale(${scaleW}, ${scaleH}) translate(-50%,-50%)`
     } else {
       // 选择适配比例缩放
-      screenRef.value.style.transform = 'scale(' + scale.value + ') '
+      screenRef.value.style.transform = `scale(${scale.value}) translate(-50%,-50%)`
     }
   }
 
